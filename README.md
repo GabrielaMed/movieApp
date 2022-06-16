@@ -8,7 +8,8 @@ In this project I used React Native, Expo and the API was <a href="https://www.t
 
 ## Installation
 
-Download the .Zip here and extract the file.
+Download the .Zip here and extract the file.<br/>
+To add all the extensions (if you don't have expo installed It might ask you to install, then just type y).
 Inside the project run:
 
 ```bash
@@ -18,8 +19,7 @@ or
 ```bash
   yarn
 ```
-to add all the extensions (if you don't have expo installed It might ask you to install).<br/>
-then run the project with:
+Then to run the project use:
 
 ```bash
   expo start
