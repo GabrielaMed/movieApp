@@ -1,80 +1,96 @@
-import { Text, View, StyleSheet, Button} from "react-native";
-import { useState, useEffect } from "react";
-import { APIKey } from "../config/Key";
+import {
+  Text,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  ScrollView
+} from 'react-native'
+import { useState, useEffect } from 'react'
+import { APIKey } from '../config/Key'
 
-export const imagePath = 'https://image.tmdb.org/t/p/w200'
+export const imagePath = 'https://image.tmdb.org/t/p/w500'
 
-export default function Home(){
-    const [movies, setMovies] = useState([])
+export function Home({ prop }) {
+  // console.log(props)
 
-    useEffect(() => { //consumindo API
-        fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${APIKey}`) //se quiser em pt só colocar '&language=pt-br' no final
-            .then(response => response.json())
-            .then(data => {  
-                setMovies(data.results)
-            })
+  const [movies, setMovies] = useState([])
 
-    }, [])
+  useEffect(() => {
+    //consumindo API
+    fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${APIKey}`) //se quiser em pt só colocar '&language=pt-br' no final
+      .then(response => response.json())
+      .then(data => {
+        setMovies(data.results)
+      })
+  }, [])
 
-    return(
-        <View style={styles.container}>
-            <Text style={styles.title}> 
-                Movies
-            </Text>
-            <View style={styles.films}>
-                {movies.map(movie => {
-                    return(
-                        <View style={styles.film} key={movie.id}>
-                            <Button 
-                                onPress={() =>
-                                    navigation.navigate('Details',{
-                                        movieId: movie.id,
-                                })
-                            }>
-                                <img 
-                                    src={`${imagePath}${movie.poster_path}`}
-                                    alt={movie.title}
-                                />
-                            </Button>
-                                <Text style={styles.filmTitle}>{movie.title}</Text>
-                        </View>
-                    )
-                })}
-            </View>
-        </View>
-    )
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Movies</Text>
+      <View style={styles.films}>
+        <ScrollView>
+          {movies.map(movie => {
+            return (
+              <View style={styles.film} key={movie.id}>
+                <TouchableOpacity
+                  style={styles.film}
+                  color="transparent"
+                  onPress={() =>
+                    prop.setGlobalState({ page: 'detail', movieId: movie.id })
+                  }
+                >
+                  <Image
+                    source={{ uri: `${imagePath}${movie.poster_path}` }}
+                    style={styles.poster}
+                    alt={movie.title}
+                  ></Image>
+                  <Text style={styles.movietitle}>{movie.title}</Text>
+                </TouchableOpacity>
+              </View>
+            )
+          })}
+        </ScrollView>
+      </View>
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({
-    container:{
-        backgroundColor: '#111',
-    },
-    
-    title:{
-        fontSize: 40,
-        color: 'black',
-        backgroundColor: 'white',
-        textAlign: 'center',
-        marginBottom: 20,
-    },
+  container: {
+    backgroundColor: '#111',
+    paddingVertical: 20,
+    flex: 1
+  },
 
-    films:{
-        padding: 40,
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        justifyContent: 'space-between'
-    },
+  title: {
+    fontSize: 40,
+    color: '#FCFCFC',
+    textAlign: 'center',
+    marginBottom: 20,
+    marginTop: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: '#FCFCFC',
+    padding: 10
+  },
 
-    film:{
-        width: 300,
-        margin: 40,
-        alignItems: 'center',
-    },
+  film: {
+    marginBottom: 20,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
 
-    filmTitle:{
-        fontWeight: 'bold',
-        fontSize: 16,
-        textAlign: 'center',
-        color: 'white',
-    }
+  poster: {
+    width: 200,
+    height: 300,
+    borderRadius: 10,
+    justifyContent: 'center'
+  },
+
+  movietitle: {
+    fontSize: 18,
+    color: '#FCFCFC',
+    textAlign: 'center',
+    marginTop: 10
+  }
 })
