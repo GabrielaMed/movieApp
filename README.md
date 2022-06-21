@@ -1,9 +1,9 @@
 # Movie App
-Esse foi um desafio da unidade curricular de desenvolvimento mobile. Decidi fazer algo um pouco mais simples que minha ideia original para poder aprender a manusear uma API.
+Esse foi um desafio da unidade curricular de desenvolvimento mobile. Decidi fazer algo um pouco mais simples que minha ideia original para poder aprender a manusear uma API. Esse app possui uma lista dos filmes mais populares da API e também tem a página de detalhes do filme, que mostra sinopse do filme, data de lançamento e uma votação média que possui na API.
 Utilizei React Native, Expo e a API <a href="https://www.themoviedb.org/" target="_blank">The Movie DB</a>
 
 ## In English
-This app was a challenge of the mobile development curricular unit. I decided to do something a little more easy then my original idea because I wanted to learn how to handle an API.
+This app was a challenge of the mobile development curricular unit. I decided to do something a little more easy then my original idea because I wanted to learn how to handle an API. This app has a list of popular movies from the API and there's also a details page from the movie, it shows the overview, release date and a vote average.
 In this project I used React Native, Expo and the API was <a href="https://www.themoviedb.org/" target="_blank">The Movie DB</a>
 
 ## Installation
